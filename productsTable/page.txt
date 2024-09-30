@@ -1,0 +1,100 @@
+'use client';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './Products.scss';
+
+interface Product {
+    // image: string;
+    name: string;
+    description: string;
+    specification: string;
+    brand: string;
+    mrp: number;
+    price: number;
+    discount: number;
+    details: string;
+    category: string;
+    inStock: boolean;
+    isAvailable: boolean;
+    // coupons: string[];
+    likes: number;
+}
+
+const ScrollableTable: React.FC = () => {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        // Fetch all products when the component mounts
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/public/products/all');
+                setProducts(response.data.data); // Assuming the products are in the `data` field
+                setLoading(false);
+            } catch (err) {
+                setError('Failed to fetch products');
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
+    if (loading) {
+        return <div>Loading products...</div>;
+    }
+
+    if (error) {
+        return <div>{error}</div>;
+    }
+
+    return (
+        <div className="table-container">
+            <table className="scrollable-table">
+                <thead>
+                    <tr>
+                        {/* <th>Image</th> */}
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Specification</th>
+                        <th>Brand</th>
+                        <th>Mrp</th>
+                        <th>Price</th>
+                        <th>Discount</th>
+                        <th>Details</th>
+                        <th>Category</th>
+                        <th>In Stock</th>
+                        <th>Is Available</th>
+                        {/* <th>Coupons</th>*/}
+                        <th>Likes</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    {products.map((product, index) => (
+                        <tr key={index}>
+                            {/* <td>
+                                <img src={`/${product.image}`} alt={product.name} width="50" height="50" />
+                            </td> */}
+                            <td>{product.name}</td>
+                            <td>{product.description}</td>
+                            <td>{product.specification}</td>
+                            <td>{product.brand}</td>
+                            <td>{product.mrp}</td>
+                            <td>{product.price}</td>
+                            <td>{product.discount}%</td>
+                            <td>{product.details}</td>
+                            <td>{product.category}</td>
+                            <td>{product.inStock ? 'Yes' : 'No'}</td>
+                            <td>{product.isAvailable ? 'Yes' : 'No'}</td>
+                            {/* <td>{product.coupons.join(', ')}</td>*/}
+                            <td>{product.likes}</td> 
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
+};
+
+export default ScrollableTable;

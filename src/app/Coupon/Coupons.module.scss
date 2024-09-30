@@ -1,0 +1,32 @@
+.tableContainer {
+    padding: 20px;
+}
+
+.PageName {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.scrollable-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.scrollable-table th,
+.scrollable-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+.scrollable-table th {
+    background-color: #f4f4f4;
+}
+
+.scrollable-table td {
+    vertical-align: middle;
+}
+
+.nav {
+    margin-bottom: 20px;
+}

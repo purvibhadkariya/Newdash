@@ -1,0 +1,51 @@
+.table-container {
+    width: 90%;
+    height: 410px;
+    border-radius: 6px;
+    overflow-x: scroll; // Keep scroll functionality
+    overflow-y: scroll; // Keep scroll functionality
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge, and Firefox */
+    -ms-overflow-style: none; // IE and Edge
+    scrollbar-width: none; // Firefox
+}
+
+.scrollable-table {
+    width: 800px;
+    border-collapse: collapse;
+
+    thead {
+        position: sticky;
+        top: 0;
+        background-color: ghostwhite;
+        // background-color: rgb(157, 218, 254);
+        // color: rgba(28, 52, 77, 0.555);
+        // color: lighten(rgb(117, 64, 131), 20%);
+        // background-color: lighten(rgba(214, 148, 232, 0.471), 10%);
+        z-index: 1;
+
+    }
+
+    th,
+    td {
+        border-radius: 7px;
+        // background-color: aqua;
+        border: 2px solid #ddd;
+        padding: 8px;
+        text-align: left;
+        white-space: nowrap; // Prevent wrapping, ensures horizontal scroll
+    }
+
+    // tr:nth-child(even) {
+    //     background-color: #4c1515;
+    // }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+}
